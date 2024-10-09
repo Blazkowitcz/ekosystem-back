@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@sequelize/mariadb": "^7.0.0-alpha.41",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.1",
+    "express-namespace": "^0.1.1",
+    "fs-extra": "^11.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.3",
+    "socket.io": "^4.8.0",
+    "socket.io-client": "^4.8.0",
+    "uuidv4": "^6.2.13"
+  },
+  "_moduleAliases": {
+    "@models": "src/models",
+    "@services": "src/services",
+    "@controllers": "src/controllers",
+    "@middlewares": "src/middlewares",
+    "@routes": "src/routes",
+    "@modules": "src/modules"
+  }
+}
