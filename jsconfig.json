@@ -8,6 +8,7 @@
         "@modules/*": ["src/modules/*"],
         "@routes/*": ["src/routes/*"],
         "@middlewares/*": ["src/middlewares/*"],
+        "@utils/*": ["src/utils/*"]
       }
     },
     "exclude": ["node_modules", "dist"]
