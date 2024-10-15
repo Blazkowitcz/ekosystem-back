@@ -1,7 +1,7 @@
 const { System } = require('@models/system.model')
 
 /**
- * 
+ * Get all Systems
  * @returns {System[]}
  */
 exports.getSystems = async() => {
@@ -9,7 +9,16 @@ exports.getSystems = async() => {
 }
 
 /**
- * 
+ * Get System by its UUID
+ * @param {UUID} id 
+ * @returns {System}
+ */
+exports.getSystem = async(id) => {
+    return await System.findByPk(id);
+}
+
+/**
+ * Add a new System
  * @param {Object} data 
  * @returns {System}
  */

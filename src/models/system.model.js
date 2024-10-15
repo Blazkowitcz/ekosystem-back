@@ -20,6 +20,10 @@ const constructor = {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    port: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
     os: {
         type: DataTypes.STRING,
         allowNull: false,
