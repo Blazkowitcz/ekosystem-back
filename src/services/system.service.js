@@ -1,4 +1,5 @@
 const { System } = require('@models/system.model')
+const { Process } = require('@models/process.model')
 
 /**
  * Get all Systems
@@ -14,7 +15,7 @@ exports.getSystems = async() => {
  * @returns {System}
  */
 exports.getSystem = async(id) => {
-    return await System.findByPk(id);
+    return await System.scope('processes').findByPk(id);
 }
 
 /**

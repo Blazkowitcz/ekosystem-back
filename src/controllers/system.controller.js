@@ -15,8 +15,6 @@ exports.getSystems = async (req, res) => {
             ...system.toJSON(),
             alive: (await ping.promise.probe(system.toJSON().ip)).alive
         })));
-        
-        console.log(result);
         return res.status(200).json(result);
     } catch (error) {
         return res.status(500).json({ message: error.message || 'An error occurred' });
@@ -32,8 +30,17 @@ exports.getSystems = async (req, res) => {
 exports.getSystemDetails = async (req, res) => {
     try{
         const system = await SystemService.getSystem(req.params.id);
-        const details = await SensorUtil.getSystemDetail(system.ip, system.port, system.sensorKey, EVENTS.GLOBAL);
-        const result = {...system.toJSON(), ...details}
+        let result = {...system.toJSON()}
+        result.processes = await Promise.all(
+            result.processes.map(async (process) => ({
+                ...process,
+                alive: await SensorUtil.pingPort(result.ip, process.port),
+            }))
+        );
+        try{
+            const details = await SensorUtil.getSystemDetail(system.ip, system.port, system.sensorKey, EVENTS.GLOBAL);
+            result = {...result, ...details}
+        }catch(error){}
         return res.status(200).json(result)
     }catch(error){
         return res.status(500).json({message: error});

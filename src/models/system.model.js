@@ -3,7 +3,7 @@ const { connection } = require('@modules/database.module');
 
 const constructor = {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
         primaryKey: true,
         allowNull: false,
         defaultValue: DataTypes.UUIDV4
