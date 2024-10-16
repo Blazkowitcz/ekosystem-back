@@ -17,6 +17,7 @@ app.use(cors());
 require('./src/routes/auth.route')(app);
 app.namespace('/api', function(){
     require('@routes/system.route')(app);
+    require('@routes/process.route')(app);
 });
 
 app.listen(process.env.PORT, function(){
