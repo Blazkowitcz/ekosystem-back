@@ -2,6 +2,7 @@ const SystemService = require('@services/system.service');
 const { SensorUtil } = require('@utils/sensor.util');
 const { EVENTS } = require('../../constants')
 const  ping = require('ping');
+
 /**
  * Get all Systems
  * @param {Request} req 
@@ -13,7 +14,8 @@ exports.getSystems = async (req, res) => {
         const systems = await SystemService.getSystems();
         const result = await Promise.all(systems.map(async (system) => ({
             ...system.toJSON(),
-            alive: (await ping.promise.probe(system.toJSON().ip)).alive
+            alive: (await ping.promise.probe(system.toJSON().ip)).alive,
+            sensorConnected: system.port ? await SensorUtil.pingPort(system.ip, system.port) : false
         })));
         return res.status(200).json(result);
     } catch (error) {
@@ -40,7 +42,9 @@ exports.getSystemDetails = async (req, res) => {
         try{
             const details = await SensorUtil.getSystemDetail(system.ip, system.port, system.sensorKey, EVENTS.GLOBAL);
             result = {...result, ...details}
-        }catch(error){}
+        }catch(error){
+            console.log(error)
+        }
         return res.status(200).json(result)
     }catch(error){
         return res.status(500).json({message: error});

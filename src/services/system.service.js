@@ -1,5 +1,4 @@
 const { System } = require('@models/system.model')
-const { Process } = require('@models/process.model')
 
 /**
  * Get all Systems

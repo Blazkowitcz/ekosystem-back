@@ -17,6 +17,6 @@ exports.checkToken = function (req, res, next) {
         req.user = decoded.user;
         next();
     } catch(error){
-        res.status(401).json({message: 'Invalid Token'});
+        res.status(401).json({message: error});
     }
 }

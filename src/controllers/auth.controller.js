@@ -1,9 +1,7 @@
 require('dotenv').config();
-const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const UserService = require('@services/user.service');
-const { error } = require('console');
 
 /**
  * Register a new user
@@ -55,7 +53,7 @@ exports.signin = async (req, res) => {
             }
         }
         jwt.sign(payload, process.env.SECRET_KEY, {expiresIn: 3600}, (error, token) => {
-            if(error) throw err;
+            if(error) throw error;
             res.status(200).json(token)
         });
     }catch(error){

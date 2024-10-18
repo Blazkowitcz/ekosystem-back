@@ -1,8 +1,6 @@
 const { EVENTS } = require('../../constants')
 const io = require("socket.io-client");
 const net = require('net');
-const { resolve } = require('path');
-const { rejects } = require('assert');
 
 const SensorUtil = {}
 
@@ -41,14 +39,14 @@ SensorUtil.getSystemDetail = (ip, port, key, event) => {
  * @returns {Boolean}
  */
 SensorUtil.pingPort = (ip, port) => {
-    return new Promise((resolve, rejects) => {
+    return new Promise((resolve) => {
         const socket = new net.Socket();
         socket.setTimeout(1000);
         socket.on('connect', function () {
             resolve(true);
-        }).on('error', function (e) {
+        }).on('error', function () {
             resolve(false);
-        }).on('timeout', function (e) {
+        }).on('timeout', function () {
             resolve(false);
         }).connect(port, ip)
     });
